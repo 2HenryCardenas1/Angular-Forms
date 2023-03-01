@@ -1,0 +1,122 @@
+<p>
+    Name : {{nameField.value}} {{nameField.valid}}
+    <input type="text" [formControl]="nameField">
+    <button [disabled]="nameField.invalid" (click)="getNameValue()">Get Value</button>
+
+    <!-- <code> 
+        <pre>
+            {{nameField | json}}
+        </pre>
+    </code>
+    -->
+
+</p>
+
+
+<p>
+    <strong *ngIf="nameField.touched && nameField.hasError('required') ">Este campo es requerido</strong>
+</p>
+<p>
+    <strong *ngIf="nameField.touched && nameField.hasError('maxlength') ">El campo debe tener maximo 10 caracteres</strong>
+</p>
+
+
+<p>
+    Email : {{email.value}}
+    <input type="email" [formControl]="email">
+</p>
+
+<p>
+    Tell : {{telField.value}}
+    <input type="tel" [formControl]="telField">
+</p>
+<p>
+    Color : {{colorField.value}}
+    <input type="color" [formControl]="colorField">
+</p>
+<p>
+    Date : {{dateField.value}}
+    <input type="date" [formControl]="dateField">
+</p>
+<p>
+    Number : {{numberField.value}}
+    <input type="number" [formControl]="numberField">
+</p>
+
+<p>
+    Category : {{categoryField.value}}
+    <select [formControl]="categoryField">
+        <option value="value1">Category1</option>
+        <option value="value2">Category2</option>
+        <option value="value3">Category3</option>
+        <option value="value4">Category4</option>
+    </select>
+</p>
+
+<p>
+    Multiple checks : {{multipleChecksField.value}}
+    <select [formControl]="multipleChecksField" multiple>
+        <option value="value1">tag1</option>
+        <option value="value2">tag2</option>
+        <option value="value3">tag3</option>
+        <option value="value4">tag4</option>
+    </select>
+</p>
+
+<p>
+    Agree checks : {{agreeField.value}}
+    <input type="checkbox" [formControl]="agreeField">
+</p>
+
+<p>
+    Radio checks : {{radioField.value}}
+    <label for="">
+        Male
+        <input type="radio" name="gender" value="male" [formControl]="radioField">
+
+    </label>
+    <label for="">
+        Female
+        <input type="radio" name="gender" value="female" [formControl]="radioField">
+
+    </label>
+    <label for="">
+        Other
+        <input type="radio" name="gender" value="other" [formControl]="radioField">
+
+    </label>
+</p>
+
+<p>
+    Zone : {{zoneField.value}}
+    <label for="">
+        Zone 1
+        <input type="radio" value="zone1" name="zone" [formControl]="zoneField">
+
+    </label>
+    <label for="">
+        Zone 2
+        <input type="radio" value="zone2" name="zone" [formControl]="zoneField">
+
+    </label>
+    <label for="">
+        Zone 3
+        <input type="radio" value="zone3" name="zone" [formControl]="zoneField">
+
+    </label>
+</p>
+
+<p>
+    Reto
+
+    {{preferenciasField.value}}
+    <select [formControl]="preferenciasField" multiple>
+        <option value="value1">FrontEnd</option>
+        <option value="value2">BackEnd</option>
+        <option value="value3">UI/UX</option>
+        <option value="value4">Data Bases</option>
+    </select>
+
+
+
+</p>
