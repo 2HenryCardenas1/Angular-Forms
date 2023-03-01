@@ -1,4 +1,71 @@
-<!-- FormGroup -->
+<!-- Form Builder -->
+<form [formGroup]="form" (ngSubmit)="save()">
+    <div>
+        <p>
+            Nome : {{nameFieldValid}} {{nameFieldInvalid}}
+            <input [class.is-valid]="nameFieldValid" [class.is-invalid]="nameFieldInvalid" formControlName="name"
+                type="text">
+
+        </p>
+        <div class="messages" [class.active]="nameFieldInvalid">
+            <p>
+                <strong *ngIf="form.get('name').touched && form.get('name').hasError('required') ">Este campo es
+                    requerido</strong>
+            </p>
+            <p>
+                <strong *ngIf="form.get('name').touched && form.get('name').hasError('maxlength') ">El campo debe tener
+                    maximo 10
+                    caracteres</strong>
+            </p>
+        </div>
+    </div>
+
+
+    <div>
+        <div>
+            <p>
+                Email : {{emailField.valid}} {{emailField.invalid}}
+                <input [class.is-valid]="emailField.valid" type="email"
+                    formControlName="email">
+            </p>
+            <div class="messages" [class.active]="emailField.touched && emailField.invalid">
+                <p>
+                    <strong *ngIf="emailField.touched && emailField.hasError('required')">Este campo es
+                        requerido</strong>
+                </p>
+
+            </div>
+        </div>
+
+
+        <p>
+            Tell :
+            <input type="tel" formControlName="tel">
+        </p>
+        <p>
+            Color :
+            <input type="color" formControlName="color">
+        </p>
+        <p>
+            Date :
+            <input type="date" formControlName="date">
+        </p>
+        <p>
+            Age :
+            <input type="number" formControlName="age">
+        </p>
+
+
+
+
+
+    </div>
+
+    <button type="submit">Send data</button>
+</form>
+
+
+<!-- FormGroup 
 <form [formGroup]="form" (ngSubmit)="save()">
     <div>
         <p>
@@ -109,7 +176,7 @@
     
     <button [disabled]="!form.valid" type="submit">Send data</button>
 </form>
-
+-->
 
 
 <!-- FormControl  

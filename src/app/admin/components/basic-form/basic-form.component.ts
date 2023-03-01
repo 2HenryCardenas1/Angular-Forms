@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basic-form',
@@ -9,9 +9,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export class BasicFormComponent implements OnInit {
 
+
+  form: FormGroup;
+
   //FormGroup
 
-  form = new FormGroup({
+  /* form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(10)]),
     email: new FormControl(''),
     tel: new FormControl(''),
@@ -25,7 +28,7 @@ export class BasicFormComponent implements OnInit {
     zone: new FormControl(''),
 
 
-  })
+  }) */
 
   /* nameField = new FormControl('', [Validators.required, Validators.maxLength(10)]);
   email = new FormControl('');
@@ -45,22 +48,43 @@ export class BasicFormComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+    this.buildForm();
+  }
 
   ngOnInit(): void {
 
   }
 
-  getNameValue() {
-    console.log(this.form.valid)
+  //Build Form
 
+  private buildForm() {
+    this.form = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.maxLength(10)]],
+      email: ['', [Validators.required]],
+      tel: [''],
+      color: ['#000000'],
+      date: [''],
+      age: [12],
+    })
   }
+
 
   save() {
-    //Data form
 
-    console.log(this.form.value)
+    if (this.form.valid) {
+      //Data form
+
+      console.log(this.form.value)
+    }
+    else {
+      //Mark all fields as touched
+      this.form.markAllAsTouched()
+    }
   }
+
 
 
 
