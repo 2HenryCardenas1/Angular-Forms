@@ -2,309 +2,90 @@
 <form [formGroup]="form" (ngSubmit)="save()">
     <div>
         <p>
-            Nome : {{nameFieldValid}} {{nameFieldInvalid}}
+            Nombre :
             <input [class.is-valid]="nameFieldValid" [class.is-invalid]="nameFieldInvalid" formControlName="name"
                 type="text">
 
         </p>
-        <div class="messages" [class.active]="nameFieldInvalid">
+        <div class="messages" [class.active]="nameField.touched && nameField.invalid">
             <p>
-                <strong *ngIf="form.get('name').touched && form.get('name').hasError('required') ">Este campo es
+                <strong *ngIf="nameField.hasError('required') ">Este campo es
                     requerido</strong>
             </p>
             <p>
-                <strong *ngIf="form.get('name').touched && form.get('name').hasError('maxlength') ">El campo debe tener
+                <strong *ngIf="nameField.hasError('maxlength') ">El campo debe tener
                     maximo 10
                     caracteres</strong>
             </p>
-        </div>
-    </div>
-
-
-    <div>
-        <div>
             <p>
-                Email : {{emailField.valid}} {{emailField.invalid}}
-                <input [class.is-valid]="emailField.valid" type="email"
-                    formControlName="email">
-            </p>
-            <div class="messages" [class.active]="emailField.touched && emailField.invalid">
-                <p>
-                    <strong *ngIf="emailField.touched && emailField.hasError('required')">Este campo es
-                        requerido</strong>
-                </p>
-
-            </div>
-        </div>
-
-
-        <p>
-            Tell :
-            <input type="tel" formControlName="tel">
-        </p>
-        <p>
-            Color :
-            <input type="color" formControlName="color">
-        </p>
-        <p>
-            Date :
-            <input type="date" formControlName="date">
-        </p>
-        <p>
-            Age :
-            <input type="number" formControlName="age">
-        </p>
-
-
-
-
-
-    </div>
-
-    <button type="submit">Send data</button>
-</form>
-
-
-<!-- FormGroup 
-<form [formGroup]="form" (ngSubmit)="save()">
-    <div>
-        <p>
-            <input [class.is-valid]="nameFieldValid" [class.is-invalid]="nameFieldInvalid" formControlName="name"
-                type="text">
-
-        </p>
-        <div class="messages" [class.active]="nameFieldInvalid">
-            <p>
-                <strong *ngIf="form.get('name').touched && form.get('name').hasError('required') ">Este campo es
-                    requerido</strong>
-            </p>
-            <p>
-                <strong *ngIf="form.get('name').touched && form.get('name').hasError('maxlength') ">El campo debe tener
-                    maximo 10
-                    caracteres</strong>
+                <strong *ngIf="nameField.hasError('pattern')">No se aceptan simbolos o numeros</strong>
             </p>
         </div>
     </div>
-
-
     <div>
         <p>
             Email :
             <input type="email" formControlName="email">
         </p>
+        <div class="messages" [class.active]="emailField.touched && emailField.invalid">
+            <p>
+                <strong *ngIf="emailField.hasError('required')">Este campo es
+                    requerido</strong>
+            </p>
+            <p>
+                <strong *ngIf="emailField.hasError('email')">Esto no es un email valido</strong>
+            </p>
 
+        </div>
+    </div>
+    <div>
         <p>
             Tell :
             <input type="tel" formControlName="tel">
         </p>
+    </div>
+
+    <div>
         <p>
             Color :
             <input type="color" formControlName="color">
         </p>
+    </div>
+    <div>
         <p>
             Date :
             <input type="date" formControlName="date">
         </p>
-        <p>
-            Number :
-            <input type="number" formControlName="age">
-        </p>
-
-        <p>
-            Category :
-            <select formControlName="category">
-                <option value="value1">Category1</option>
-                <option value="value2">Category2</option>
-                <option value="value3">Category3</option>
-                <option value="value4">Category4</option>
-            </select>
-        </p>
-
-        <p>
-            Multiple checks :
-            <select formControlName="multipleChecks" multiple>
-                <option value="value1">tag1</option>
-                <option value="value2">tag2</option>
-                <option value="value3">tag3</option>
-                <option value="value4">tag4</option>
-            </select>
-        </p>
-
-        <p>
-            Agree checks :
-            <input type="checkbox" formControlName="agree">
-        </p>
-
-        <p>
-            Gender :
-            <label>
-                Male
-                <input type="radio" name="gender" value="male" formControlName="gender">
-
-            </label>
-            <label>
-                Female
-                <input type="radio" name="gender" value="female" formControlName="gender">
-
-            </label>
-            <label>
-                Other
-                <input type="radio" name="gender" value="other" formControlName="gender">
-
-            </label>
-        </p>
-
-        <p>
-            Zone :
-            <label>
-                Zone 1
-                <input type="radio" value="zone1" name="zone" formControlName="zone">
-
-            </label>
-            <label>
-                Zone 2
-                <input type="radio" value="zone2" name="zone" formControlName="zone">
-
-            </label>
-            <label>
-                Zone 3
-                <input type="radio" value="zone3" name="zone" formControlName="zone">
-
-            </label>
-        </p>
     </div>
-    
-    <button [disabled]="!form.valid" type="submit">Send data</button>
+
+
+
+    <div>
+        <p>
+            Age :
+            <input type="number" formControlName="age">
+
+        </p>
+        <div class="messages" [class.active]="ageField.touched && ageField.invalid">
+            <p>
+                <strong *ngIf="ageField.hasError('required')">Este campo es
+                    requerido</strong>
+            </p>
+            <p>
+                <strong *ngIf="ageField.hasError('min') ">Debe ser mayor de edad</strong>
+            </p>
+            <p>
+                <strong *ngIf="ageField.hasError('max') ">Debe ser menor de 100 años</strong>
+            </p>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <button type="submit">Send data</button>
 </form>
--->
-
-
-<!-- FormControl  
-<p>
-    Name : {{nameField.value}} {{nameField.valid}}
-    <input [class.is-valid]="isNameFieldValid" [class.is-invalid]="isNameFieldInvalid" type="text"
-        [formControl]="nameField">
-
-    <button [disabled]="nameField.invalid" (click)="getNameValue()">Get Value</button> 
-
-    code> 
-        <pre>
-            {{nameField | json}}
-        </pre>
-    </code>
-    
-
-</p>
-
-<div class="messages" [class.active]="isNameFieldInvalid">
-    <p>
-        <strong *ngIf="nameField.touched && nameField.hasError('required') ">Este campo es requerido</strong>
-    </p>
-    <p>
-        <strong *ngIf="nameField.touched && nameField.hasError('maxlength') ">El campo debe tener maximo 10
-            caracteres</strong>
-    </p>
-</div>
-
-
-
-<p>
-    Email : {{email.value}}
-    <input type="email" [formControl]="email">
-</p>
-
-<p>
-    Tell : {{telField.value}}
-    <input type="tel" [formControl]="telField">
-</p>
-<p>
-    Color : {{colorField.value}}
-    <input type="color" [formControl]="colorField">
-</p>
-<p>
-    Date : {{dateField.value}}
-    <input type="date" [formControl]="dateField">
-</p>
-<p>
-    Number : {{numberField.value}}
-    <input type="number" [formControl]="numberField">
-</p>
-
-<p>
-    Category : {{categoryField.value}}
-    <select [formControl]="categoryField">
-        <option value="value1">Category1</option>
-        <option value="value2">Category2</option>
-        <option value="value3">Category3</option>
-        <option value="value4">Category4</option>
-    </select>
-</p>
-
-<p>
-    Multiple checks : {{multipleChecksField.value}}
-    <select [formControl]="multipleChecksField" multiple>
-        <option value="value1">tag1</option>
-        <option value="value2">tag2</option>
-        <option value="value3">tag3</option>
-        <option value="value4">tag4</option>
-    </select>
-</p>
-
-<p>
-    Agree checks : {{agreeField.value}}
-    <input type="checkbox" [formControl]="agreeField">
-</p>
-
-<p>
-    Radio checks : {{radioField.value}}
-    <label for="">
-        Male
-        <input type="radio" name="gender" value="male" [formControl]="radioField">
-
-    </label>
-    <label for="">
-        Female
-        <input type="radio" name="gender" value="female" [formControl]="radioField">
-
-    </label>
-    <label for="">
-        Other
-        <input type="radio" name="gender" value="other" [formControl]="radioField">
-
-    </label>
-</p>
-
-<p>
-    Zone : {{zoneField.value}}
-    <label for="">
-        Zone 1
-        <input type="radio" value="zone1" name="zone" [formControl]="zoneField">
-
-    </label>
-    <label for="">
-        Zone 2
-        <input type="radio" value="zone2" name="zone" [formControl]="zoneField">
-
-    </label>
-    <label for="">
-        Zone 3
-        <input type="radio" value="zone3" name="zone" [formControl]="zoneField">
-
-    </label>
-</p>
-
-<p>
-    Reto
-
-    {{preferenciasField.value}}
-    <select [formControl]="preferenciasField" multiple>
-        <option value="value1">FrontEnd</option>
-        <option value="value2">BackEnd</option>
-        <option value="value3">UI/UX</option>
-        <option value="value4">Data Bases</option>
-    </select>
-
-
-
-</p>
--->

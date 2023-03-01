@@ -12,41 +12,6 @@ export class BasicFormComponent implements OnInit {
 
   form: FormGroup;
 
-  //FormGroup
-
-  /* form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-    email: new FormControl(''),
-    tel: new FormControl(''),
-    color: new FormControl('#000000'),
-    date: new FormControl(''),
-    age: new FormControl(12),
-    category: new FormControl(''),
-    multipleChecks: new FormControl(''),
-    agree: new FormControl(false),
-    gender: new FormControl(''),
-    zone: new FormControl(''),
-
-
-  }) */
-
-  /* nameField = new FormControl('', [Validators.required, Validators.maxLength(10)]);
-  email = new FormControl('');
-  telField = new FormControl('');
-  colorField = new FormControl('');
-  dateField = new FormControl('');
-  numberField = new FormControl('');
-
-  categoryField = new FormControl('value1');
-  multipleChecksField = new FormControl();
-
-  agreeField = new FormControl(false);
-
-  radioField = new FormControl('');
-  zoneField = new FormControl('');
-  preferenciasField = new FormControl(); */
-
-
 
   constructor(
     private formBuilder: FormBuilder
@@ -62,12 +27,17 @@ export class BasicFormComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(10)]],
-      email: ['', [Validators.required]],
-      tel: [''],
+      name: [' ', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]],
+      email: [' ', [Validators.required, Validators.email]],
+      tel: [' ', [Validators.required]],
       color: ['#000000'],
-      date: [''],
-      age: [12],
+      date: [' '],
+      age: [18, [Validators.required, Validators.min(18), Validators.max(100)]],
+      category: [' ',],
+      tag: [''],
+      agree: [false, [Validators.requiredTrue]],
+      gender: [' '],
+      zone: ['']
     })
   }
 
@@ -98,6 +68,10 @@ export class BasicFormComponent implements OnInit {
     return this.form.get('name').invalid && this.form.get('name').touched
   }
 
+  get nameField() {
+    return this.form.get('name')
+  }
+
   get emailField() {
     return this.form.get('email')
   }
@@ -123,7 +97,7 @@ export class BasicFormComponent implements OnInit {
   }
 
   get multipleChecksField() {
-    return this.form.get('multipleChecks')
+    return this.form.get('tag')
   }
 
   get agreeField() {
@@ -138,20 +112,5 @@ export class BasicFormComponent implements OnInit {
     return this.form.get('zone')
   }
 
-
-
-
-
-
-
-
-  //Form Control
-  /* 
-    get isNameFieldValid() {
-      return this.nameField.valid && this.nameField.touched
-    }
-    get isNameFieldInvalid() {
-      return this.nameField.invalid && this.nameField.touched
-    } */
 
 }
