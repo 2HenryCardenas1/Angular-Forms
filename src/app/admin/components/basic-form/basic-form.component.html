@@ -1,16 +1,131 @@
+<!-- FormGroup -->
+<form [formGroup]="form" (ngSubmit)="save()">
+    <div>
+        <p>
+            <input [class.is-valid]="nameFieldValid" [class.is-invalid]="nameFieldInvalid" formControlName="name"
+                type="text">
+
+        </p>
+        <div class="messages" [class.active]="nameFieldInvalid">
+            <p>
+                <strong *ngIf="form.get('name').touched && form.get('name').hasError('required') ">Este campo es
+                    requerido</strong>
+            </p>
+            <p>
+                <strong *ngIf="form.get('name').touched && form.get('name').hasError('maxlength') ">El campo debe tener
+                    maximo 10
+                    caracteres</strong>
+            </p>
+        </div>
+    </div>
+
+
+    <div>
+        <p>
+            Email :
+            <input type="email" formControlName="email">
+        </p>
+
+        <p>
+            Tell :
+            <input type="tel" formControlName="tel">
+        </p>
+        <p>
+            Color :
+            <input type="color" formControlName="color">
+        </p>
+        <p>
+            Date :
+            <input type="date" formControlName="date">
+        </p>
+        <p>
+            Number :
+            <input type="number" formControlName="age">
+        </p>
+
+        <p>
+            Category :
+            <select formControlName="category">
+                <option value="value1">Category1</option>
+                <option value="value2">Category2</option>
+                <option value="value3">Category3</option>
+                <option value="value4">Category4</option>
+            </select>
+        </p>
+
+        <p>
+            Multiple checks :
+            <select formControlName="multipleChecks" multiple>
+                <option value="value1">tag1</option>
+                <option value="value2">tag2</option>
+                <option value="value3">tag3</option>
+                <option value="value4">tag4</option>
+            </select>
+        </p>
+
+        <p>
+            Agree checks :
+            <input type="checkbox" formControlName="agree">
+        </p>
+
+        <p>
+            Gender :
+            <label>
+                Male
+                <input type="radio" name="gender" value="male" formControlName="gender">
+
+            </label>
+            <label>
+                Female
+                <input type="radio" name="gender" value="female" formControlName="gender">
+
+            </label>
+            <label>
+                Other
+                <input type="radio" name="gender" value="other" formControlName="gender">
+
+            </label>
+        </p>
+
+        <p>
+            Zone :
+            <label>
+                Zone 1
+                <input type="radio" value="zone1" name="zone" formControlName="zone">
+
+            </label>
+            <label>
+                Zone 2
+                <input type="radio" value="zone2" name="zone" formControlName="zone">
+
+            </label>
+            <label>
+                Zone 3
+                <input type="radio" value="zone3" name="zone" formControlName="zone">
+
+            </label>
+        </p>
+    </div>
+    
+    <button [disabled]="!form.valid" type="submit">Send data</button>
+</form>
+
+
+
+<!-- FormControl  
 <p>
     Name : {{nameField.value}} {{nameField.valid}}
-    <input [class.is-valid]="isNameFieldValid"
-        [class.is-invalid]="isNameFieldInvalid" type="text" [formControl]="nameField">
+    <input [class.is-valid]="isNameFieldValid" [class.is-invalid]="isNameFieldInvalid" type="text"
+        [formControl]="nameField">
 
-    <button [disabled]="nameField.invalid" (click)="getNameValue()">Get Value</button>
+    <button [disabled]="nameField.invalid" (click)="getNameValue()">Get Value</button> 
 
-    <!-- <code> 
+    code> 
         <pre>
             {{nameField | json}}
         </pre>
     </code>
-    -->
+    
 
 </p>
 
@@ -125,3 +240,4 @@
 
 
 </p>
+-->
