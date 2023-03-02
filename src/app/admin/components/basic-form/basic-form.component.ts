@@ -27,7 +27,13 @@ export class BasicFormComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      name: [' ', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]],
+
+      //Sub group
+      fullName: this.formBuilder.group({
+        name: [' ', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]],
+        lastName: [' ', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]]
+      }),
+
       email: [' ', [Validators.required, Validators.email]],
       tel: [' ', [Validators.required]],
       color: ['#000000'],
@@ -62,14 +68,18 @@ export class BasicFormComponent implements OnInit {
   //Form Group
 
   get nameFieldValid() {
-    return this.form.get('name').valid && this.form.get('name').touched
+    return this.form.get('fullName').get('name').valid && this.form.get('fullName').get('name').touched
   }
   get nameFieldInvalid() {
-    return this.form.get('name').invalid && this.form.get('name').touched
+    return this.form.get('fullName').get('name').invalid && this.form.get('fullName').get('name').touched
   }
 
   get nameField() {
-    return this.form.get('name')
+    return this.form.get('fullName').get('name')
+  }
+
+  get lastField() {
+    return this.form.get('fullName').get('lastName')
   }
 
   get emailField() {

@@ -1,10 +1,9 @@
 <!-- Form Builder -->
 <form [formGroup]="form" (ngSubmit)="save()">
-    <div>
+    <div formGroupName="fullName">
         <p>
-            Nombre :
-            <input [class.is-valid]="nameFieldValid" [class.is-invalid]="nameFieldInvalid" formControlName="name"
-                type="text">
+            Nombre : {{nameField.value}} 
+            <input formControlName="name" type="text">
 
         </p>
         <div class="messages" [class.active]="nameField.touched && nameField.invalid">
@@ -20,7 +19,29 @@
             <p>
                 <strong *ngIf="nameField.hasError('pattern')">No se aceptan simbolos o numeros</strong>
             </p>
+
         </div>
+        <p>
+            LastName : {{lastField.value}}
+            <input formControlName="lastName" type="text">
+
+        </p>
+        <div class="messages" [class.active]="lastField.touched && lastField.invalid">
+            <p>
+                <strong *ngIf="lastField.hasError('required') ">Este campo es
+                    requerido</strong>
+            </p>
+            <p>
+                <strong *ngIf="lastField.hasError('maxlength') ">El campo debe tener
+                    maximo 10
+                    caracteres</strong>
+            </p>
+            <p>
+                <strong *ngIf="lastField.hasError('pattern')">No se aceptan simbolos o numeros</strong>
+            </p>
+
+        </div>
+
     </div>
     <div>
         <p>
