@@ -37,7 +37,7 @@
             <input placeholder="password" formControlName="confirmPassword" matInput type="password">
             <div *ngIf="confirmPasswordField.touched && form.errors">
 
-              <mat-error *ngIf="form.hasError('passwords_not_match')">
+              <mat-error *ngIf="form.hasError('passwords_not_match')"> <!-- call group validator, validate all form-->
                 Las constraseñas no coinciden
               </mat-error>
 
