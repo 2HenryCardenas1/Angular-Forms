@@ -30,30 +30,31 @@ export class BasicFormComponent implements OnInit {
 
       //Sub group
       fullName: this.formBuilder.group({
-        name: [' ', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]],
-        lastName: [' ', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]]
+        name: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]],
+        lastName: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]]
       }),
 
-      email: [' ', [Validators.required, Validators.email]],
-      tel: [' ', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      tel: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       color: ['#000000'],
-      date: [' '],
+      date: [''],
       age: [18, [Validators.required, Validators.min(18), Validators.max(100)]],
-      category: [' ',],
+      category: [''],
       tag: [''],
-      agree: [false, [Validators.requiredTrue]],
-      gender: [' '],
+      agree: [false],
+      gender: [''],
       zone: ['']
     })
   }
 
 
   save() {
+    
 
     if (this.form.valid) {
       //Data form
 
-      console.log(this.form.value)
+      console.log("ss", this.form.value)
     }
     else {
       //Mark all fields as touched
