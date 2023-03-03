@@ -15,6 +15,9 @@
                             <mat-error *ngIf="nameField.hasError('required')">
                                 Name is required
                             </mat-error>
+                            <mat-error *ngIf="nameField.hasError('category_not_available')">
+                                Name not available
+                            </mat-error>
                         </div>
                     </mat-form-field>
                 </div>

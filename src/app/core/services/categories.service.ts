@@ -30,4 +30,9 @@ export class CategoriesService {
     return this.http.delete<Category>(`${environment.url_api}/categories/${id}`);
   }
 
+  checKCategory(name: string) {
+    return this.http.post(`${environment.url_api}/categories/availability`,name);
+  }
+
+
 }
