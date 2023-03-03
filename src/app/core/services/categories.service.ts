@@ -17,6 +17,10 @@ export class CategoriesService {
     return this.http.get<Category[]>(`${environment.url_api}/categories`);
   }
 
+  getCategory(id: string) {
+    return this.http.get<Category>(`${environment.url_api}/categories/${id}`);
+  }
+
   //Partial es un tipo de dato que permite que los atributos de la interfaz sean opcionales
   createCategory(data: Partial<Category>) {
     return this.http.post<Category>(`${environment.url_api}/categories/`, data);

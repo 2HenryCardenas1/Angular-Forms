@@ -40,7 +40,11 @@
         </mat-card-content>
 
         <mat-card-actions>
-            <button mat-raised-button mat-button color="primary" type="submit">Save Category</button>
+            <button mat-raised-button mat-button color="primary" type="submit">
+                <span *ngIf="!categoryId">Create Category</span>
+                <span *ngIf="categoryId">Edit Category</span>
+
+            </button>
         </mat-card-actions>
 
     </mat-card>

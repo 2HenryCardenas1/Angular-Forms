@@ -7,8 +7,9 @@
         <img [src]="category.image" alt="image">
 
         <mat-card-actions class="btn">
-            <a [routerLink]="['edit',category.id]" style="cursor: pointer;"> <mat-icon>edit</mat-icon> </a>
-            <a (click)="deleteCategory(category.id)" style="cursor: pointer;"><mat-icon >delete</mat-icon></a>
+            <mat-icon [routerLink]="['edit',category.id]" style="cursor: pointer;">edit</mat-icon>
+            <mat-icon (click)="deleteCategory(category.id)" style="cursor: pointer;">delete</mat-icon>
+
         </mat-card-actions>
 
     </mat-card>

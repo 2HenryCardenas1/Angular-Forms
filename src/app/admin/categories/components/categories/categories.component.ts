@@ -29,7 +29,7 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.getAllCategories()
       .subscribe({
         next: (response) => {
-          console.log(response);
+          
           this.categories = response;
         }
       })
@@ -43,7 +43,7 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.deleteCategory(id)
       .subscribe({
         next: (response) => {
-          console.log(response);
+         
           this.listAllCategories();
         }
       })

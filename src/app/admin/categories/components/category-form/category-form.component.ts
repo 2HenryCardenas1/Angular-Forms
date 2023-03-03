@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { CategoriesService } from './../../../../core/services/categories.service';
-import {MyValidators} from '../../../../utils/validators'
 
 @Component({
   selector: 'app-category-form',
@@ -14,12 +13,14 @@ import {MyValidators} from '../../../../utils/validators'
 export class CategoryFormComponent implements OnInit {
 
   form: FormGroup;
-
+  categoryId: string;
   constructor(
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
     private router: Router,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private route: ActivatedRoute,
+
 
   ) {
     this.buildForm();
@@ -27,11 +28,20 @@ export class CategoryFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    //capturamos el id de la categoria
+    this.route.params.subscribe((params: Params) => {
+      this.categoryId = params.id;
+      if (this.categoryId) {
+        this.getCategory();
+      }
+    })
+
   }
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required], MyValidators.validateCategory(this.categoriesService)],
+      name: ['', [Validators.required]],
       image: ['', [Validators.required]],
     }
     );
@@ -49,11 +59,28 @@ export class CategoryFormComponent implements OnInit {
   saveCategory() {
 
     if (this.form.valid) {
-      this.createCategory();
+      if (this.categoryId) {
+
+        this.updateCategory();
+      } else {
+        this.createCategory();
+      }
+
     } else {
       this.form.markAllAsTouched();
     }
 
+  }
+
+  private updateCategory() {
+    const data = this.form.value;
+    this.categoriesService.updateCategory(this.categoryId, data)
+      .subscribe({
+        next: (response) => {
+
+          this.router.navigate(['admin/categories']);
+        }
+      })
   }
 
 
@@ -70,7 +97,15 @@ export class CategoryFormComponent implements OnInit {
   }
 
 
-  
+  private getCategory() {
+    this.categoriesService.getCategory(this.categoryId)
+      .subscribe({
+        next: (response) => {
+
+          this.form.patchValue(response);
+        }
+      })
+  }
 
   // upload file to firebase storage
 
@@ -101,7 +136,7 @@ export class CategoryFormComponent implements OnInit {
       .subscribe();
   }
 
- 
+
 
 
 
