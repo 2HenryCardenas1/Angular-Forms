@@ -1,14 +1,21 @@
 .example-card {
   max-width: 400px;
+  margin: 5px;
+  align-items: center;
+  
+
 }
 
-.example-header-image {
- 
-  background-size: cover;
-}
 
 .container{
     display: grid;
     grid-template-columns:  1fr 1fr 1fr 1fr 1fr;
+    margin: 5px;
     
 }
+
+.btn{
+    display: flex;
+    justify-content: flex-end;
+}
+

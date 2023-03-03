@@ -26,4 +26,8 @@ export class CategoriesService {
     return this.http.put<Category>(`${environment.url_api}/categories/${id}`, data);
   }
 
+  deleteCategory(id: string) {
+    return this.http.delete<Category>(`${environment.url_api}/categories/${id}`);
+  }
+
 }

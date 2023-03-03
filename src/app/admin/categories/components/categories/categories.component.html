@@ -2,10 +2,15 @@
     <mat-card class="example-card" *ngFor="let category of categories">
         <mat-card-header>
             <mat-card-title>{{category.name}}</mat-card-title>
-    
+
         </mat-card-header>
-        <img mat-card-image [src]="category.image" alt="image" style="size: 100%;">
-    
+        <img [src]="category.image" alt="image">
+
+        <mat-card-actions class="btn">
+            <a [routerLink]="['edit',category.id]" style="cursor: pointer;"> <mat-icon>edit</mat-icon> </a>
+            <a (click)="deleteCategory(category.id)" style="cursor: pointer;"><mat-icon >delete</mat-icon></a>
+        </mat-card-actions>
+
     </mat-card>
 </div>
 

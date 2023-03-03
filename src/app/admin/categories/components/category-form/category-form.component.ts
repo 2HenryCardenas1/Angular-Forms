@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { CategoriesService } from './../../../../core/services/categories.service';
+
 
 @Component({
   selector: 'app-category-form',
@@ -15,7 +18,8 @@ export class CategoryFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
-    private router: Router
+    private router: Router,
+    private storage: AngularFireStorage
 
   ) {
     this.buildForm();
@@ -57,12 +61,47 @@ export class CategoryFormComponent implements OnInit {
     this.categoriesService.createCategory(data)
       .subscribe({
         next: (response) => {
-          
+
           this.router.navigate(['admin/categories']);
         }
       })
 
   }
+
+
+  
+
+  // upload file to firebase storage
+
+  uploadFile(event: any) {
+    let file = 0;
+    const image = event.target.files[0];
+    const name = `category${file + 1}.png`;
+
+    const ref = this.storage.ref(name);
+    const task = this.storage.upload(name, image);
+
+    task.snapshotChanges()
+      .pipe(
+        finalize(() => {
+
+          const url_image$ = ref.getDownloadURL()
+          url_image$.subscribe((url) => {
+
+            console.log(url)
+
+            this.imageField.setValue(url);
+          });
+
+        }
+        )
+      )
+
+      .subscribe();
+  }
+
+ 
+
 
 
 
