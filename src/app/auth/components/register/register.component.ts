@@ -40,10 +40,24 @@ export class RegisterComponent implements OnInit {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6), MyValidators.validPassword]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required]],
+      type: ['company', [Validators.required]],
+      companyName: ['', [Validators.required]],
     },
-    {
-      validators : MyValidators.passwordsMatch // <-- Here we pass the custom validator.
+      {
+        validators: MyValidators.passwordsMatch // <-- Here we pass the custom validator.
+      });
+
+    // Here we subscribe to the valueChanges observable of the type field.
+    this.typeField.valueChanges.subscribe(value => {
+      console.log(value);
+      if (value === 'company') {
+        this.companyNameField.setValidators([Validators.required]); // <-- Here we add the required validator.
+      } else {
+        this.companyNameField.setValidators(null);
+      }
+
+      this.companyNameField.updateValueAndValidity(); // <-- Here we update the value and validity of the field.
     });
   }
 
@@ -53,6 +67,15 @@ export class RegisterComponent implements OnInit {
 
   get confirmPasswordField() {
     return this.form.get('confirmPassword');
+  }
+
+  get typeField() {
+    return this.form.get('type');
+  }
+
+  get companyNameField() {
+
+    return this.form.get('companyName');
   }
 
 }
