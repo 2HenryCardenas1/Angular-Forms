@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { CategoriesService } from './../../../../core/services/categories.service';
+import { Category } from './../../../../core/models/category.model';
+
 
 @Component({
   selector: 'app-category-form',
@@ -13,13 +13,28 @@ import { CategoriesService } from './../../../../core/services/categories.servic
 export class CategoryFormComponent implements OnInit {
 
   form: FormGroup;
-  categoryId: string;
+  flagIsNew: boolean = true;
+
+  // set input category
+  @Input()
+  set category(data: Category) {
+    if (data) {
+      this.flagIsNew = false;
+      this.form.patchValue(data);
+    }
+  }
+
+  @Output() createCategory = new EventEmitter();
+  @Output() updateCategory = new EventEmitter();
+
+
+
+
   constructor(
     private formBuilder: FormBuilder,
-    private categoriesService: CategoriesService,
-    private router: Router,
+
     private storage: AngularFireStorage,
-    private route: ActivatedRoute,
+
 
 
   ) {
@@ -29,13 +44,6 @@ export class CategoryFormComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //capturamos el id de la categoria
-    this.route.params.subscribe((params: Params) => {
-      this.categoryId = params.id;
-      if (this.categoryId) {
-        this.getCategory();
-      }
-    })
 
   }
 
@@ -59,11 +67,11 @@ export class CategoryFormComponent implements OnInit {
   saveCategory() {
 
     if (this.form.valid) {
-      if (this.categoryId) {
+      if (this.flagIsNew) {
+        this.createCategory.emit(this.form.value);
 
-        this.updateCategory();
       } else {
-        this.createCategory();
+        this.updateCategory.emit(this.form.value);
       }
 
     } else {
@@ -72,40 +80,7 @@ export class CategoryFormComponent implements OnInit {
 
   }
 
-  private updateCategory() {
-    const data = this.form.value;
-    this.categoriesService.updateCategory(this.categoryId, data)
-      .subscribe({
-        next: (response) => {
 
-          this.router.navigate(['admin/categories']);
-        }
-      })
-  }
-
-
-  private createCategory() {
-    const data = this.form.value;
-    this.categoriesService.createCategory(data)
-      .subscribe({
-        next: (response) => {
-
-          this.router.navigate(['admin/categories']);
-        }
-      })
-
-  }
-
-
-  private getCategory() {
-    this.categoriesService.getCategory(this.categoryId)
-      .subscribe({
-        next: (response) => {
-
-          this.form.patchValue(response);
-        }
-      })
-  }
 
   // upload file to firebase storage
 
