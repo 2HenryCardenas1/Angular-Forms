@@ -1,0 +1,14 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+ 
+  background-size: cover;
+}
+
+.container{
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr 1fr 1fr;
+    
+}
