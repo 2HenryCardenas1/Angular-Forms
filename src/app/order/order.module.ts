@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { OrderRoutingModule } from './order-routing.module';
-import { OrderComponent } from './components/order/order.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './../material/material.module';
 import { SharedModule } from './../shared/shared.module';
+import { OrderComponent } from './components/order/order.component';
+import { OrderRoutingModule } from './order-routing.module';
 
 @NgModule({
   declarations: [OrderComponent],
@@ -13,7 +13,9 @@ import { SharedModule } from './../shared/shared.module';
     CommonModule,
     OrderRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class OrderModule { }

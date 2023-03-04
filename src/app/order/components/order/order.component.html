@@ -25,7 +25,45 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Datos personales</ng-template>
-    <h1>contenifo</h1>
+
+    <form action="" formGroup="form" (ngSubmit)="saveOrder()">
+      <mat-card>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input type="text" placeholder="Nombre" formControlName="name" matInput>
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- Form into main form -->
+          <div class="row">
+            <div class="col-xs">
+              <button mat-raised-button color="primary" type="button" (click)="addAddressField()">Add address</button>
+              <div formArrayName="address" *ngFor="let address of addressField.controls; let i=index">
+                <div [formGroupName]="i">
+                  <mat-form-field>
+                    <mat-label>ZipCode</mat-label>
+                    <input type="text" placeholder="Zip" formControlName="zipCode" matInput>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Text</mat-label>
+                    <input type="text" placeholder="Text" formControlName="text" matInput>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit">Next</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </form>
+
+
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Pago</ng-template>
