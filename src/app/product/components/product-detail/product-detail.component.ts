@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { ProductsService } from './../../../core/services/products/products.service';
 import { Product } from './../../../core/models/product.model';
+import { ProductsService } from './../../../core/services/products/products.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -28,23 +28,24 @@ export class ProductDetailComponent implements OnInit {
 
   fetchProduct(id: string) {
     this.productsService.getProduct(id)
-    .subscribe(product => {
-      this.product = product;
-    });
+      .subscribe(product => {
+        this.product = product;
+      });
   }
 
   createProduct() {
     const newProduct: Product = {
-      _id: '222',
-      name: 'nuevo desde angular',
-      image: 'assets/images/banner-1.jpg',
+      id: '222',
+      title: 'nuevo desde angular',
+      images: 'assets/images/banner-1.jpg',
       price: 3000,
-      description: 'nuevo producto'
+      description: 'nuevo producto',
+      categoryId: '1'
     };
     this.productsService.createProduct(newProduct)
-    .subscribe(product => {
-      console.log(product);
-    });
+      .subscribe(product => {
+        console.log(product);
+      });
   }
 
   updateProduct() {
@@ -53,16 +54,16 @@ export class ProductDetailComponent implements OnInit {
       description: 'edicion titulo'
     };
     this.productsService.updateProduct('2', updateProduct)
-    .subscribe(product => {
-      console.log(product);
-    });
+      .subscribe(product => {
+        console.log(product);
+      });
   }
 
   deleteProduct() {
     this.productsService.deleteProduct('222')
-    .subscribe(rta => {
-      console.log(rta);
-    });
+      .subscribe(rta => {
+        console.log(rta);
+      });
   }
 
 }
