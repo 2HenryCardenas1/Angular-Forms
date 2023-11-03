@@ -13,6 +13,7 @@ import { MyValidators } from './../../../utils/validators';
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
+  formProvider: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,6 +54,10 @@ export class RegisterComponent implements OnInit {
       console.log(value);
       if (value === 'company') {
         this.companyNameField.setValidators([Validators.required]); // <-- Here we add the required validator.
+        this.formProvider = this.formBuilder.group({
+          name: ['', [Validators.required]],
+          lastName: ['', [Validators.required]],
+        })
       } else {
         this.companyNameField.setValidators(null);
       }

@@ -59,7 +59,7 @@ export class CategoryComponent implements OnInit {
       })
   }
 
-
+//Aqui se llama al servicio para obtener la categoria
   private getCategory(id: string) {
 
     this.categoriesService.getCategory(id)
